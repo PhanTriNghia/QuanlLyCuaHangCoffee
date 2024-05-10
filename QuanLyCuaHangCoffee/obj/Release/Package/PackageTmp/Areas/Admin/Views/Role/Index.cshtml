@@ -1,0 +1,75 @@
+﻿@using Microsoft.AspNet.Identity.EntityFramework
+@model IEnumerable<IdentityRole>
+
+@{
+    ViewBag.Title = "Quản lý quyền";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .d-grid {
+        display: grid;
+    }
+
+    .m-b-5 {
+        margin-bottom: 5px;
+    }
+</style>
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Thông tin quyền</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-success" })
+                    </p>
+                    <div class="jsgrid">
+                        <div class="jsgrid-grid-header ">
+                            <table class="jsgrid-table">
+                                <tr class="jsgrid-header-row">
+                                    <th class="jsgrid-header-cell jsgrid-align-center" style="width: 150px">#</th>
+                                    <th class="jsgrid-header-cell">Tên</th>
+                                    <th class="jsgrid-header-cell" style="width: 100px"></th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="jsgrid-grid-body">
+                            <table class="jsgrid-table">
+                                <tbody>
+                                    @if (Model != null && Model.Any())
+                                    {
+                                        var i = 1;
+                                        foreach (var item in Model)
+                                        {
+                                            <tr class="jsgrid-row ">
+                                                <td class="jsgrid-cell jsgrid-align-center" style="width: 150px">
+                                                    @i
+                                                </td>
+                                                <td class="jsgrid-cell">
+                                                    @Html.DisplayFor(modelItem => item.Name)
+                                                </td>
+                                                <td class="jsgrid-cell jsgrid-align-center" style="width: 100px">
+                                                   @* <div class="d-grid m-b-5">
+                                                        @Html.ActionLink("Sửa", "Edit", new { id = item.Id }, new { @class = "btn btn-sm btn-primary" })
+                                                    </div>*@
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                </tbody>
+
+                            </table>
+                        </div>
+                        @* @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+

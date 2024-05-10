@@ -1,0 +1,154 @@
+﻿@model QuanLyCuaHangCoffee.Models.EF.SanPham
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<head>
+    <link href="~/Content/css/stylechitietsanpham.css" rel="stylesheet" />
+    <style>
+        .card {
+            border: none;
+            
+        }
+        .card-img-shadow {
+            box-shadow: 0px 0px 13px 0px #00000040;
+            border-radius: 10px;
+        }
+        .row > * {
+            padding-left: 0;
+        }
+        .bg-whitesmoke {
+            background-color: whitesmoke
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div style="margin-top: 15rem">
+            <div class="">
+                <ul class="breadcrumb">
+                    <li>Menu</li>
+                    <li>Loại sản phẩm</li>
+                    <li style="color: #777">tên sản phẩm</li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div id="productCarousel" class="carousel">
+                    <div class="carousel-inner">                     
+                        <img class="w-100" src="@Model.HinhAnhSP" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 p-5">
+                <div class="inf_procduct">
+                    <p class="inf_procduct_title">@Html.DisplayFor(model => model.TenSP)</p>
+                    <p class="inf_procduct_price">@String.Format("{0:N0}", Model.GiaBan)</p>
+                </div>
+                <div class="desc_product">
+                    <p class="desc_product_title">Mô tả sản phẩm</p>
+                    <p class="desc_product_content">
+                        @Html.DisplayFor(model => model.Mota)
+                    </p>
+                </div>
+                <div class="product_to_cart">
+                    <a href="/ShoppingCart/AddToCart/@Model.IDSanPham" class="btn btn-cart">Thêm Vào Giỏ</a>
+                </div>
+
+            </div>
+        </div>
+        <hr />
+        <div class="row bg-whitesmoke">
+            @Html.Action("Index", "Comment", new { IDSanPham = Model.IDSanPham })
+            <hr />
+            @Html.Action("PostComment", "Comment", new { IDSanPham = Model.IDSanPham })
+        </div>
+
+        <hr />
+        <h2>Sản phẩm liên quan</h2>
+        <br />
+        <div class="row">
+            @foreach (var items in ViewBag.RelatedSanPham)
+            {
+                <div class="col-2" >
+                    <div class="card">
+                        <a href="@items.IDSanPham"><img src="@items.HinhAnhSP" class="card-img-top card-img-shadow"></a>                       
+                        <div class="card-body">
+                            <h5 class="card-title">@items.TenSP</h5>
+                            <p class="card-text">@String.Format("{0:N0}", items.GiaBan)</p>
+                           @* <a href="/ShoppingCart/AddToCart/@Model.IDSanPham" class="btn btn-cart">Thêm Vào Giỏ</a>*@
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+        <br />
+     </div>
+</body>
+    
+
+
+
+@*<div>
+        <h4>SanPham</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.TenSP)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TenSP)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.HinhAnhSP)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.HinhAnhSP)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.GiaBan)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GiaBan)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Mota)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Mota)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.TrangThai)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.LoaiSP.TenLSP)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.LoaiSP.TenLSP)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.IDSanPham }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

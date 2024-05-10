@@ -1,0 +1,157 @@
+﻿@model PagedList.PagedList<QuanLyCuaHangCoffee.Models.EF.Slider>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Thông tin slider";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .d-grid {
+        display: grid;
+    }
+
+    .m-b-5 {
+        margin-bottom: 5px;
+    }
+
+    .m-l-10 {
+        margin-left: 10px;
+    }
+</style>
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Thông tin sản phẩm</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-success" })
+                    </p>
+                    <div class="jsgrid">
+                        <div class="jsgrid-grid-header ">
+                            <table class="jsgrid-table">
+                                <tr class="jsgrid-header-row">
+                                    <th class="jsgrid-header-cell" style="width: 50px">STT</th>
+                                    <th class="jsgrid-header-cell jsgrid-align-center">Hình ảnh</th>
+                                    @*<th class="jsgrid-header-cell">Nội dung</th>*@
+                                    <th class="jsgrid-header-cell jsgrid-align-center" style="width: 200px">Trạng thái</th>
+                                    <th class="jsgrid-header-cell" style="width: 150px"></th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="jsgrid-grid-body">
+                            <table class="jsgrid-table">
+                                <tbody>
+                                    @if (Model != null && Model.Any())
+                                    {
+
+                                        var i = 1;
+                                        foreach (var item in Model)
+                                        {
+                                            var strCheck = item.TrangThai ? "<i class='fa fa-check text-success'></i>" : "<i class='fas fa-times text-danger'></i>";
+                                            <tr class="jsgrid-row ">
+                                                <td class="jsgrid-cell jsgrid-align-center" style="width: 50px">
+                                                    @i
+                                                </td>
+                                                <td class="jsgrid-cell jsgrid-align-center">
+                                                    <img src="@item.HinhAnhSlider" width="400px" />
+                                                </td>
+                                               @* <td class="jsgrid-cell">
+                                                    @Html.DisplayFor(modelItem => item.NoiDungSlider)
+                                                </td>*@
+                                                <td class="jsgrid-cell jsgrid-align-center" style="width: 200px">
+                                                    <a href='#' data-id="@item.IDSlider" class="btnActive">@Html.Raw(strCheck)</a>
+                                                </td>
+                                                <td class="jsgrid-cell jsgrid-align-center" style="width: 150px">
+                                                    <div class="d-grid m-b-5">
+                                                        @Html.ActionLink("Cập nhật", "Edit", new { id = item.IDSlider }, new { @class = "btn btn-sm btn-primary" })
+                                                    </div>
+                                                    <div class="d-grid m-b-5">
+                                                        <a href="#" data-id="@item.IDSlider" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            i++;
+                                        }
+                                    }
+                                </tbody>
+
+                            </table>
+                            <div class="m-l-10">
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnActive', function (e) {
+                e.preventDefault();
+                var btn = $(this);
+                var id = btn.data("id");
+                $.ajax({
+                    url: '/admin/sliders/IsActive',
+                    type: 'POST',
+                    data: { id: id },
+                    success: function (rs) {
+                        if (rs.success) {
+                            if (rs.isActive) {
+                                btn.html("<i class='fa fa-check text-success'></i>");
+                            } else {
+                                btn.html("<i class='fas fa-times text-danger'></i>");
+                            }
+                        }
+                    }
+                });
+            });
+
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                Swal.fire({
+                    title: 'Bạn có muốn xóa không',
+                    text: "Slide sẽ bị xóa khỏi danh sách",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#00CC00',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Hủy',
+                    confirmButtonText: 'Có',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/admin/sliders/delete',
+                            type: 'POST',
+                            data: { id: id },
+                            success: function (rs) {
+                                if (rs.success) {
+                                    $('#trow_' + id).remove();
+                                }
+                            }
+                        });
+                        Swal.fire(
+                            'Xóa thành công!',
+                            'Slide đã được xóa.',
+                            'success'
+                        ).then(() => {
+                            location.reload();
+                        });
+                    }
+                })
+            });
+        });
+    </script>
+}

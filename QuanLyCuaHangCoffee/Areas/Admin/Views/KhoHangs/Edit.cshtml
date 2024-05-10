@@ -1,0 +1,80 @@
+﻿@model QuanLyCuaHangCoffee.Models.EF.KhoHang
+
+@{
+    ViewBag.Title = "Cập nhật nguyên liệu";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .d-grid {
+        display: inline-grid;
+    }
+</style>
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Cập nhật thông tin nguyên liệu</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.IDKhoHang)
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.NguyenLieu.TenNguyenLieu, "Tên nguyên liệu", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-12">
+                                @Html.DropDownList("IDNguyenLieu", null, htmlAttributes: new { @class = "form-control" })
+                                @*@Html.DropDownList(model => model.NguyenLieu.TenNguyenLieu, new { htmlAttributes = new { @class = "form-control" } })*@
+                                @Html.ValidationMessageFor(model => model.NguyenLieu.TenNguyenLieu, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SoLuongGiao, "Số lượng", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.SoLuongGiao, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.SoLuongGiao, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Ngày nhập</label>
+                            <div class="col-md-6">
+                                <input class="form-control" name="NgayGiao" id="selectedDate" type="date" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-1 d-grid">
+                                <input type="submit" value="Cập nhật" class="btn btn-success" />
+                            </div>
+                            <div class="col-1 d-grid">
+                                @Html.ActionLink("Trở lại", "Index", null, new { @class = "btn btn-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#selectedDate').change(function () {
+                var selectedDate = new Date($(this).val());
+                var formattedDate = selectedDate.toISOString().split('T')[0];
+                $.ajax({
+                    url: '/admin/khohangs/create',
+                    type: 'POST',
+                    data: { NgayGiao: formattedDate },
+                    success: function (result)
+                });
+            });
+        });
+    </script>
+}

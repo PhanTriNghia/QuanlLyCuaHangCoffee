@@ -1,0 +1,83 @@
+﻿@model IEnumerable<QuanLyCuaHangCoffee.Models.EF.ProductFavorite>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container body-content" style="margin-top: 14rem">
+    <section class="wrapper" id="caphe">
+        <div class="products">
+            <ul>
+                
+                @foreach (var items in Model)
+                {
+                    <li class="main-product">
+                        <div class="img-product">
+                            <a href="/sanpham/detail/@items.IDSanPham">
+                                <img class="img-prd"
+                                     src="@items.SanPham.HinhAnhSP"
+                                     alt="">
+                            </a>
+
+                        </div>
+                        <div class="content-product">
+                            <h3 class="content-product-h3">@items.SanPham.TenSP</h3>                         
+                            <div class="content-product-deltals">
+                                <div class="price">
+                                    <span class="money">@String.Format("{0:N0}", items.SanPham.GiaBan)</span>
+                                </div>
+                                @* <a data-id="@items.IDSanPham class="btnAddToCart">Thêm Vào Giỏ</a>*@
+                                @* <button class="btn btn-cart">Thêm Vào Giỏ</button>*@
+                                <a href="/ShoppingCart/AddToCart/@items.IDSanPham" class="btn btn-cart">Thêm Vào Giỏ</a>
+
+                            </div>
+                            @using (Html.BeginForm("Favorite", "ProductFavorite", FormMethod.Post))
+                            {
+                                <div class="content-product-deltals" style="margin-top: 10px">
+                                    @*<a href="#" data-id="@items.IDSanPham" class="btn btn-danger btnFav">Thêm vào mục yêu thích</a>*@
+                                    @Html.AntiForgeryToken()
+                                    <input type="hidden" name="idProduct" value="@items.IDSanPham" />
+                                    <button class="btn btn-danger" type="submit">Bỏ yêu thích</button>
+                                </div>
+                            }
+
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </section>
+</div>
+
+
+
+    @*<table class="table" style="margin-top: 14rem">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.SanPham.TenSP)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SanPham.TenSP)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.IDProductFavorite }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.IDProductFavorite }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.IDProductFavorite })
+                    </td>
+                </tr>
+            }
+
+        </table>*@

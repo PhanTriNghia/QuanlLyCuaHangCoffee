@@ -1,0 +1,214 @@
+﻿@model QuanLyCuaHangCoffee.Models.EF.Voucher
+
+@{
+    ViewBag.Title = "Thêm mới voucher";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .d-grid {
+        display: inline-grid;
+    }
+
+    .mf-5 {
+        margin-left: 5px;
+    }
+
+    .mr-10 {
+        margin-right: 10px;
+    }
+
+    .text-center {
+        text-align: center
+    }
+
+    .card-title {
+        font-size: 2rem;
+    }
+
+    .check-box {
+        width: 20px;
+        height: 25px;
+    }
+</style>
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Thêm mới Voucher</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                <div class="col-12">
+                                    @Html.LabelFor(model => model.MoTa, "Mô tả", htmlAttributes: new { @class = "control-label col-md-6" })
+                                    @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group d-flex">
+                                <div class="col-4">
+                                    <label>Mã giảm giá</label>
+                                    @Html.EditorFor(model => model.TenVoucher, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TenVoucher, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-4">
+                                    @Html.LabelFor(model => model.TienGiam, "Tiền giảm", htmlAttributes: new { @class = "control-label col-md-6" })
+                                    @Html.EditorFor(model => model.TienGiam, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.TienGiam, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-4">
+                                    <label>Giới hạn số lần dùng</label>
+                                    @Html.EditorFor(model => model.GioiHan, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.GioiHan, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group d-flex">
+                                <div class="col-6">
+                                    <label>Ngày bắt đầu</label>
+                                    <input class="form-control" name="NgayBatDau" id="selectedStartDate" type="date" />
+                                    @Html.ValidationMessageFor(model => model.NgayBatDau, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="col-6">
+                                    <label>Ngày kết thúc</label>
+                                    <input class="form-control" name="NgayKetThuc" id="selectedEndDate" type="date" />
+                                    @Html.ValidationMessageFor(model => model.NgayKetThuc, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group d-flex mf-5">
+                                <div class="col-1 d-grid">
+                                    <input type="submit" value="Thêm mới" class="btn btn-success" />
+                                </div>
+                                <div class="col-1 d-grid">
+                                    @Html.ActionLink("Trở lại", "Index", null, new { @class = "btn btn-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('#selectedStartDate').change(function () {
+                var selectedStartDate = new Date($(this).val());               
+                $.ajax({
+                    url: '/admin/vouchers/create',
+                    type: 'POST',
+                    data: { NgayBatDau: selectedStartDate },
+                    success: function (result)@* {
+                        console.log('Ngày đã được gửi và lưu thành công.');
+                    },
+                    error: function () {
+                        console.log('Đã xảy ra lỗi khi gửi ngày.');
+                    }*@
+                });
+            });
+            $('#selectedEndDate').change(function () {
+                var selectedEndDate = new Date($(this).val());
+                $.ajax({
+                    url: '/admin/vouchers/create',
+                    type: 'POST',
+                    data: { NgayKetThuc: selectedEndDate },
+                    success: function (result)@* {
+                        console.log('Ngày đã được gửi và lưu thành công.');
+                    },
+                        error: function () {
+                            console.log('Đã xảy ra lỗi khi gửi ngày.');
+                        }*@
+                });
+        });
+        });
+    </script>
+}
+@*@using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>Voucher</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.TenVoucher, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TenVoucher, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TenVoucher, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.MoTa, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.MoTa, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.MoTa, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TienGiam, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TienGiam, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TienGiam, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayBatDau, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NgayBatDau, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NgayBatDau, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayKetThuc, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NgayKetThuc, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.NgayKetThuc, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GioiHan, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GioiHan, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.GioiHan, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TrangThai, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.TrangThai)
+                        @Html.ValidationMessageFor(model => model.TrangThai, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+*@

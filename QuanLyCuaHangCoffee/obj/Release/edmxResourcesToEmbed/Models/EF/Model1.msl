@@ -1,0 +1,187 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="QLCHUOICOFFEEModelStoreContainer" CdmEntityContainer="QLCHUOICOFFEEEntities">
+    <EntitySetMapping Name="ChiTietDonHangs">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.ChiTietDonHang">
+        <MappingFragment StoreEntitySet="ChiTietDonHang">
+          <ScalarProperty Name="IDChiTietDH" ColumnName="IDChiTietDH" />
+          <ScalarProperty Name="IDDonHang" ColumnName="IDDonHang" />
+          <ScalarProperty Name="IDSanPham" ColumnName="IDSanPham" />
+          <ScalarProperty Name="SoLuongSP" ColumnName="SoLuongSP" />
+          <ScalarProperty Name="TongTienSP" ColumnName="TongTienSP" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CongThucs">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.CongThuc">
+        <MappingFragment StoreEntitySet="CongThuc">
+          <ScalarProperty Name="IDCongThuc" ColumnName="IDCongThuc" />
+          <ScalarProperty Name="IDSanPham" ColumnName="IDSanPham" />
+          <ScalarProperty Name="Noidung" ColumnName="Noidung" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CouponUsers">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.CouponUser">
+        <MappingFragment StoreEntitySet="CouponUser">
+          <ScalarProperty Name="IDCouponUser" ColumnName="IDCouponUser" />
+          <ScalarProperty Name="IDCoupon" ColumnName="IDCoupon" />
+          <ScalarProperty Name="IDDonHang" ColumnName="IDDonHang" />
+          <ScalarProperty Name="NgayDung" ColumnName="NgayDung" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CuaHangs">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.CuaHang">
+        <MappingFragment StoreEntitySet="CuaHang">
+          <ScalarProperty Name="IDCuaHang" ColumnName="IDCuaHang" />
+          <ScalarProperty Name="DiaChiCH" ColumnName="DiaChiCH" />
+          <ScalarProperty Name="SoLuongNV" ColumnName="SoLuongNV" />
+          <ScalarProperty Name="SDTCuaHang" ColumnName="SDTCuaHang" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DoanhThus">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.DoanhThu">
+        <MappingFragment StoreEntitySet="DoanhThu">
+          <ScalarProperty Name="IDDoanhThu" ColumnName="IDDoanhThu" />
+          <ScalarProperty Name="NgayThongKe" ColumnName="NgayThongKe" />
+          <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+          <ScalarProperty Name="TongDoanhThu" ColumnName="TongDoanhThu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DonHangs">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.DonHang">
+        <MappingFragment StoreEntitySet="DonHang">
+          <ScalarProperty Name="IDDonHang" ColumnName="IDDonHang" />
+          <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+          <ScalarProperty Name="NgayDat" ColumnName="NgayDat" />
+          <ScalarProperty Name="TongTienBill" ColumnName="TongTienBill" />
+          <ScalarProperty Name="TinhTrang" ColumnName="TinhTrang" />
+          <ScalarProperty Name="ThanhToan" ColumnName="ThanhToan" />
+          <ScalarProperty Name="PTTT" ColumnName="PTTT" />
+          <ScalarProperty Name="TenKH" ColumnName="TenKH" />
+          <ScalarProperty Name="SDTKH" ColumnName="SDTKH" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="DiaChiKH" ColumnName="DiaChiKH" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KhoHangs">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.KhoHang">
+        <MappingFragment StoreEntitySet="KhoHang">
+          <ScalarProperty Name="IDKhoHang" ColumnName="IDKhoHang" />
+          <ScalarProperty Name="IDNguyenLieu" ColumnName="IDNguyenLieu" />
+          <ScalarProperty Name="NgayGiao" ColumnName="NgayGiao" />
+          <ScalarProperty Name="SoLuongGiao" ColumnName="SoLuongGiao" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LoaiSPs">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.LoaiSP">
+        <MappingFragment StoreEntitySet="LoaiSP">
+          <ScalarProperty Name="IDLoaiSP" ColumnName="IDLoaiSP" />
+          <ScalarProperty Name="TenLSP" ColumnName="TenLSP" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NguyenLieux">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.NguyenLieu">
+        <MappingFragment StoreEntitySet="NguyenLieu">
+          <ScalarProperty Name="IDNguyenLieu" ColumnName="IDNguyenLieu" />
+          <ScalarProperty Name="TenNguyenLieu" ColumnName="TenNguyenLieu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NhanViens">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.NhanVien">
+        <MappingFragment StoreEntitySet="NhanVien">
+          <ScalarProperty Name="IDNhanVien" ColumnName="IDNhanVien" />
+          <ScalarProperty Name="IDCuaHang" ColumnName="IDCuaHang" />
+          <ScalarProperty Name="TenNV" ColumnName="TenNV" />
+          <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+          <ScalarProperty Name="DiaChiNV" ColumnName="DiaChiNV" />
+          <ScalarProperty Name="NgayLam" ColumnName="NgayLam" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="Luong" ColumnName="Luong" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductFavorites">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.ProductFavorite">
+        <MappingFragment StoreEntitySet="ProductFavorite">
+          <ScalarProperty Name="IDProductFavorite" ColumnName="IDProductFavorite" />
+          <ScalarProperty Name="IDSanPham" ColumnName="IDSanPham" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseHisotries">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.PurchaseHisotry">
+        <MappingFragment StoreEntitySet="PurchaseHisotry">
+          <ScalarProperty Name="IDHistory" ColumnName="IDHistory" />
+          <ScalarProperty Name="IDSanPham" ColumnName="IDSanPham" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="NgayMua" ColumnName="NgayMua" />
+          <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SanPhams">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.SanPham">
+        <MappingFragment StoreEntitySet="SanPham">
+          <ScalarProperty Name="IDSanPham" ColumnName="IDSanPham" />
+          <ScalarProperty Name="IDLoaiSP" ColumnName="IDLoaiSP" />
+          <ScalarProperty Name="IDCuaHang" ColumnName="IDCuaHang" />
+          <ScalarProperty Name="TenSP" ColumnName="TenSP" />
+          <ScalarProperty Name="HinhAnhSP" ColumnName="HinhAnhSP" />
+          <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
+          <ScalarProperty Name="Mota" ColumnName="Mota" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sliders">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.Slider">
+        <MappingFragment StoreEntitySet="Slider">
+          <ScalarProperty Name="IDSlider" ColumnName="IDSlider" />
+          <ScalarProperty Name="HinhAnhSlider" ColumnName="HinhAnhSlider" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="NoiDungSlider" ColumnName="NoiDungSlider" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vouchers">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.Voucher">
+        <MappingFragment StoreEntitySet="Voucher">
+          <ScalarProperty Name="IDCoupon" ColumnName="IDCoupon" />
+          <ScalarProperty Name="TenVoucher" ColumnName="TenVoucher" />
+          <ScalarProperty Name="MoTa" ColumnName="MoTa" />
+          <ScalarProperty Name="TienGiam" ColumnName="TienGiam" />
+          <ScalarProperty Name="NgayBatDau" ColumnName="NgayBatDau" />
+          <ScalarProperty Name="NgayKetThuc" ColumnName="NgayKetThuc" />
+          <ScalarProperty Name="GioiHan" ColumnName="GioiHan" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="QLCHUOICOFFEEModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="Ngaytao" ColumnName="Ngaytao" />
+          <ScalarProperty Name="CommentText" ColumnName="CommentText" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="IDSanPham" ColumnName="IDSanPham" />
+          <ScalarProperty Name="IDComment" ColumnName="IDComment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

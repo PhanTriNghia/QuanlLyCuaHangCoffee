@@ -1,0 +1,119 @@
+﻿@model IEnumerable<QuanLyCuaHangCoffee.Models.EF.SanPham>
+
+@{
+    ViewBag.Title = "ProductCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .mt-11{
+        margin-top: 16rem;
+    }
+</style>
+<section class="container wrapper" id="caphe">
+
+    <div style="margin-top: 150px">
+        @using (Html.BeginForm("ProductCategory", "SanPham", FormMethod.Get))
+        {
+            <label for="storeId">Chọn cửa hàng:</label>
+            <select name="idCuaHang" class="form-group">
+                @foreach (var store in ViewBag.StoreList)
+                {
+                    @*<option value="@store.IDCuaHang">@store.DiaChiCH</option>*@
+                    <option value="@store.IDCuaHang" @(store.IDCuaHang == ViewBag.SelectedStoreId ? "selected" : "")>
+                        @store.DiaChiCH
+                    </option>
+                }
+                
+            </select>          
+            <input  class="btn btn-success" type="submit" value="Xem sản phẩm"/>
+        }
+    </div>
+    
+    <div class="products">
+
+        <ul>
+            @foreach (var items in Model)
+            {
+                <li class="main-product">
+                    <div class="img-product">
+                        <a href="/sanpham/detail/@items.IDSanPham">
+                            <img class="img-prd"
+                                 src="@items.HinhAnhSP"
+                                 alt="">
+                        </a>
+                    </div>
+                    <div class="content-product">
+                        <h3 class="content-product-h3">@items.TenSP</h3>
+                        <div class="content-product-deltals">
+                            <div class="price">
+                                <span class="money">@String.Format("{0:N0}", items.GiaBan)</span>
+                            </div>
+                            <a href="/ShoppingCart/AddToCart/@items.IDSanPham" class="btn btn-cart">Thêm Vào Giỏ</a>
+                        </div>
+                        @using (Html.BeginForm("Favorite", "ProductFavorite", FormMethod.Post))
+                        {
+                            <div class="content-product-deltals" style="margin-top: 10px">
+                                @*<a href="#" data-id="@items.IDSanPham" class="btn btn-danger btnFav">Thêm vào mục yêu thích</a>*@
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="idProduct" value="@items.IDSanPham" />
+                                <button class="btn btn-danger" type="submit">Thêm vào mục yêu thích</button>
+                            </div>
+                        }
+                    </div>
+
+
+
+                </li>
+            }
+        </ul>
+    </div>
+
+
+</section>
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TenSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HinhAnhSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GiaBan)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Mota)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TrangThai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoaiSP.TenLSP)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.TenSP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.HinhAnhSP)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.GiaBan)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Mota)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TrangThai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoaiSP.TenLSP)
+        </td>
+    </tr>
+}
+
+</table>*@

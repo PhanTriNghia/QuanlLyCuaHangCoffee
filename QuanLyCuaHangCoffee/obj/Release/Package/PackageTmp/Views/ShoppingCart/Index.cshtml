@@ -1,0 +1,77 @@
+﻿@model QuanLyCuaHangCoffee.Models.Cart
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .mtop-12{
+        margin-top: 14rem;
+    }
+    input[type=text], input[type=email], input[type=password], input[type=number], input[type=search], textarea {  
+        padding: 3px 4px;
+    }
+    .mbottom{
+        margin-bottom: 3rem;
+    }
+</style>
+<div class="container mtop-12 modal-body">
+    @if (Model != null)
+    {
+        <div class="cart-row">
+            <span class="cart-item cart-header cart-column">Sản Phẩm</span>
+            <span class="cart-price cart-header cart-column">Giá</span>
+            <span class="cart-quantity cart-header cart-column">Số Lượng</span>
+        </div>
+        <div class="cart-items">
+            @foreach (var items in Model.Items)
+            {
+                int total = items._sanpham.GiaBan * items._soluong;
+                <div class="cart-row">
+                    <div class="cart-item cart-column">
+                        <img class="cart-item-image" src="@items._sanpham.HinhAnhSP" width="100" height="100">
+                        <span class="cart-item-title">@items._sanpham.TenSP</span>
+                    </div>
+                    <span class="cart-price cart-column">@String.Format("{0:N0}", items._sanpham.GiaBan)</span>
+                    <div class="cart-quantity cart-column">
+                        @*<input class="cart-quantity-input" type="number" value="1">*@
+                        @using (Html.BeginForm("Update", "ShoppingCart"))
+                        {
+                            <input type="hidden" value="@items._sanpham.IDSanPham" name="ID_Sanpham" />
+                            <input class="cart-quantity-input" type="number" min="1" value="@items._soluong" name="Soluong"/>
+                            <input class="btn btn-success" type="submit" value="Cập nhật" />
+
+                        }
+                        <a href="/shoppingcart/removecart/@items._sanpham.IDSanPham" style="margin-left:18px" class="btn btn-danger">Xóa</a>
+                    </div>
+
+                </div>
+
+            }
+
+        </div>
+        <div class="cart-total mbottom">
+            <strong class="cart-total-title">Tổng Cộng:</strong>
+            <span class="cart-total-price ">@String.Format("{0:N0}", Model.TotalMoney())</span>
+        </div>
+        <div class="cart-total mbottom">
+            <a href="/shoppingcart/checkout" class="btn btn-success">Đặt hàng</a>
+            @*<input class="btn btn-success" value="" />*@
+        </div>
+    }
+    else
+    {
+        <div class="cart-row">
+            <span class="cart-item cart-header cart-column">Sản Phẩm</span>
+            <span class="cart-price cart-header cart-column">Giá</span>
+            <span class="cart-quantity cart-header cart-column">Số Lượng</span>
+        </div>
+        <div class="cart-total mbottom">
+            <strong class="cart-total-title">Tổng Cộng:</strong>
+            <span class="cart-total-price ">0</span>
+        </div>
+        
+    }
+
+
+</div>

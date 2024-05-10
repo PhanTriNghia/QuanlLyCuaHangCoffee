@@ -1,0 +1,100 @@
+﻿@model IEnumerable<QuanLyCuaHangCoffee.Models.EF.ChiTietDonHang>
+
+@{
+    ViewBag.Title = "OrderUser";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .user-infor-text {
+        text-align: left;
+        font-size: 28px;
+        margin-bottom: 16px;
+    }
+
+    .user-history-text {
+        text-align: left;
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+
+    .overflow-ellipsis {
+        white-space: nowrap; /* Ngăn chữ tràn dòng */
+        overflow: hidden; /* Ẩn chữ vượt quá giới hạn */
+        text-overflow: ellipsis; /* Hiển thị dấu "..." khi chữ vượt quá */
+    }
+</style>
+
+<div class="container" style="margin-top: 16rem">
+    <h2 class="user-infor-text">Đơn hàng của bạn</h2>
+    @if (Model != null && Model.Any())
+    {
+        foreach (var items in Model)
+        {
+            <h5 class="user-history-text">Ngày mua: @items.DonHang.NgayDat</h5>
+            <div class="card mb-12" style="border: none; margin-bottom: 20px">
+                <div class="row g-0">
+                    <div class="col-md-2">
+                        <a href="/sanpham/detail/@items.IDSanPham"><img src="@items.SanPham.HinhAnhSP" class="img-fluid rounded-start"></a>
+                    </div>
+                    <div class="col-md-10">
+                        <div class="card-body">
+                            <h3 class="card-title">@items.SanPham.TenSP</h3>
+                            <p class="card-text overflow-ellipsis">@items.SanPham.Mota</p>
+                            <h3 class="card-title" style="color: ">@items.SanPham.GiaBan</h3>
+                            <p class="card-text"><small class="text-body-secondary">x @items.SoLuongSP</small></p>
+                            <a href="#" data-id="@items.IDChiTietDH" class="btn btn-sm btn-danger btnDelete">Hủy</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <h3>Bạn chưa mua sản phẩm nào</h3>
+    }
+</div>
+
+</section>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                Swal.fire({
+                    title: 'Bạn có muốn xóa không',
+                    text: "Đơn hàng sẽ bị xóa khỏi danh sách",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#00CC00',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Hủy',
+                    confirmButtonText: 'Có',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/shoppingcart/DeleteOrderUser',
+                            type: 'POST',
+                            data: { id: id },
+                            success: function (rs) {
+                                if (rs.success) {
+                                    $('#trow_' + id).remove();
+                                }
+                            }
+                        });
+                        Swal.fire(
+                            'Xóa thành công!',
+                            'Đơn hàng đã được xóa.',
+                            'success'
+                        ).then(() => {
+                            location.reload();
+                        });
+                    }
+                })
+            });
+        });
+    </script>
+}
+

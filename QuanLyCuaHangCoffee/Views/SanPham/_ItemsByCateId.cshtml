@@ -1,0 +1,99 @@
+﻿@model IEnumerable<QuanLyCuaHangCoffee.Models.EF.SanPham>
+@{
+    Layout = null;
+}
+<style>
+    .btn-danger {
+        border-radius: 3px;
+    }
+</style>
+
+<section class="wrapper" id="caphe">
+    <div class="products">
+        <ul>
+            @foreach (var items in Model)
+            {
+                <li class="main-product">
+
+                    <div class="img-product">
+                        <a href="/sanpham/detail/@items.IDSanPham">
+                            <img class="img-prd"
+                                 src="@items.HinhAnhSP"
+                                 alt="">
+                        </a>
+
+                    </div>
+                    <div class="content-product">
+                        <h3 class="content-product-h3">@items.TenSP</h3>
+                        <div class="content-product-deltals">
+                            <div class="price">
+                                <span class="money">@String.Format("{0:N0}", items.GiaBan)</span>
+                            </div>
+                            @* <a data-id="@items.IDSanPham class="btnAddToCart">Thêm Vào Giỏ</a>*@
+                            @* <button class="btn btn-cart">Thêm Vào Giỏ</button>*@
+                            <a href="/ShoppingCart/AddToCart/@items.IDSanPham" class="btn btn-cart">Thêm Vào Giỏ</a>
+
+                        </div>
+                        @using (Html.BeginForm("Favorite", "ProductFavorite", FormMethod.Post))
+                        {
+                        <div class="content-product-deltals" style="margin-top: 10px">
+                        @*<a href="#" data-id="@items.IDSanPham" class="btn btn-danger btnFav">Thêm vào mục yêu thích</a>*@
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="idProduct" value="@items.IDSanPham" />
+                        @if (ViewBag.IsFavorite == true)
+                        {
+                            <button class="btn btn-danger " type="submit">Bỏ yêu thích</button>
+                        }
+                        else
+                        {
+                    <button class="btn btn-danger " type="submit">Thêm vào mục yêu thích</button>
+                        }
+                        @*<button class="btn btn-danger @btnClass" type="submit">@buttonText</button>*@
+
+
+                    </div>
+                        }
+
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+</section>
+
+@section script{  
+   
+    }
+
+
+@*
+    @if (Model != null && Model.Any())
+    {
+    <section class="wrapper ">
+        @foreach (var items in Model)
+        {
+            <h2>Cà phê</h2>
+            <div class="products @items.LoaiSP.TenLSP ">
+                <ul>
+                    <li class="main-product">
+                        <div class="img-product">
+                            <img class="img-prd"
+                                 src="@items.HinhAnhSP"
+                                 alt="">
+                        </div>
+                        <div class="content-product">
+                            <h3 class="content-product-h3">@items.TenSP</h3>
+                            <div class="content-product-deltals">
+                                <div class="price">
+                                    <span class="money">@items.GiaBan</span>
+                                </div>
+                                <button type="button" class="btn btn-cart">Thêm Vào Giỏ</button>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        }
+    </section>
+    }
+*@

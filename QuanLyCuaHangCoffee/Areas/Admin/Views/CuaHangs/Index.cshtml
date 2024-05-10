@@ -1,0 +1,146 @@
+﻿@model PagedList.PagedList<QuanLyCuaHangCoffee.Models.EF.CuaHang>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Danh sách cửa hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .d-grid {
+        display: grid;
+    }
+
+    .m-b-5 {
+        margin-bottom: 5px;
+    }
+
+    .m-l-10 {
+        margin-left: 10px;
+    }
+</style>
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Danh sách cửa hàng</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-success" })
+                    </p>
+                    <div class="jsgrid">
+                        <div class="jsgrid-grid-header ">
+                            <table class="jsgrid-table">
+                                <tr class="jsgrid-header-row">
+                                    <th class="jsgrid-header-cell" style="width: 50px">STT</th>
+                                    <th class="jsgrid-header-cell">Địa chỉ cửa hàng</th>
+                                    <th class="jsgrid-header-cell">Số lượng nhân viên</th>
+                                    <th class="jsgrid-header-cell">Số điện thoại cửa hàng</th>
+                                    <th class="jsgrid-header-cell">Trạng thái</th>
+                                    <th class="jsgrid-header-cell" style="width: 100px"></th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="jsgrid-grid-body">
+                            <table class="jsgrid-table">
+                                <tbody>
+                                    @if (Model != null && Model.Any())
+                                    {
+
+                                        var i = 1;
+                                        foreach (var item in Model)
+                                        {
+                                    <tr class="jsgrid-row ">
+                                        <td class="jsgrid-cell jsgrid-align-center" style="width: 50px">
+                                            @i
+                                        </td>
+
+                                        <td class="jsgrid-cell">
+                                            @Html.DisplayFor(modelItem => item.DiaChiCH)
+                                        </td>
+                                        <td class="jsgrid-cell">
+                                            @Html.DisplayFor(modelItem => item.SoLuongNV)
+                                        </td>
+                                        <td class="jsgrid-cell">
+                                            @Html.DisplayFor(modelItem => item.SDTCuaHang)
+                                        </td>
+                                        <td class="jsgrid-cell">
+                                            @if (item.TrangThai == true)
+                                            {
+                                                <p style="color: green">Hoạt động</p>
+                                            }
+                                            else
+                                            {
+                                                <p style="color: red">Ngừng hoạt động</p>
+                                            }
+                                        </td>
+                                        <td class="jsgrid-cell jsgrid-align-center" style="width: 100px">
+                                            <div class="d-grid m-b-5">
+                                                @Html.ActionLink("Cập nhật", "Edit", new { id = item.IDCuaHang }, new { @class = "btn btn-sm btn-primary" })
+                                            </div>
+                                            <div class="d-grid m-b-5">
+                                                <a href="#" data-id="@item.IDCuaHang" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                            i++;
+                                        }
+                                    }
+                                </tbody>
+
+                            </table>
+                            <div class="m-l-10">
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            $('body').on('click', '.btnDelete', function () {
+                var id = $(this).data("id");
+                Swal.fire({
+                    title: 'Bạn có muốn xóa không',
+                    text: "Cửa hàng sẽ bị xóa khỏi danh sách",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#00CC00',
+                    cancelButtonColor: '#d33',
+                    cancelButtonText: 'Hủy',
+                    confirmButtonText: 'Có',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: '/admin/cuahangs/delete',
+                            type: 'POST',
+                            data: { id: id },
+                            success: function (rs) {
+                                if (rs.success) {
+                                    $('#trow_' + id).remove();
+                                }
+                            }
+                        });
+                        Swal.fire(
+                            'Xóa thành công!',
+                            'Cửa hàng đã được xóa.',
+                            'success'
+                        ).then(() => {
+                            location.reload();
+                        });
+                    }
+                })
+            });
+        });
+    </script>
+}
+

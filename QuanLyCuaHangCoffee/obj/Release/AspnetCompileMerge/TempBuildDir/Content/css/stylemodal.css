@@ -1,0 +1,113 @@
+﻿.modal {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+    .modal.open {
+        display: flex;
+    }
+
+.modal-container {
+    background-color: white;
+    width: 500px;
+    max-width: calc(100% - 32px);
+    min-height: 200px;
+    position: relative;
+    animation: modalFaceIn ease 0.6s;
+}
+
+.modal-close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 8px 16px;
+    color: white;
+}
+
+    .modal-close:hover {
+        background: #ccc;
+        color: black;
+        cursor: pointer;
+    }
+
+.modal-heading {
+    /* canh giua cach 1 */
+    /* padding: 42px 16px;
+    text-align: center; */
+    /* canh giua cach 2 */
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 30px;
+    background-color: #009688;
+}
+
+.modal-heading-icon {
+    margin-right: 16px;
+}
+
+.modal-body {
+    padding: 0px 16px;
+}
+
+.modal-label {
+    display: block;
+    font-size: 18px;
+    margin: 16px 0px;
+}
+
+.modal-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    width: 100%;
+    font-size: 15px;
+}
+.btn_login {
+    padding: 14px;
+    font-size: 15px;
+    margin: 16px 0px;
+    color: white;
+    width: 100%;
+    border: none;
+    background: #009688;
+}
+
+
+    #buy-ticket:hover {
+        color: black;
+        background: #ccc;
+        cursor: pointer;
+    }
+
+.modal-footer {
+    padding: 16px;
+}
+
+.modal-help {
+    text-align: end;
+}
+
+    .modal-help a {
+        color: blue;
+    }
+
+/* tạo chuyển động từ trên xuống cho modal buy ticket */
+@keyframes modalFaceIn {
+    from {
+        opacity: 0;
+        transform: translateY(-150px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

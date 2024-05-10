@@ -1,0 +1,395 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLCHUOICOFFEEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="ChiTietDonHang">
+    <Key>
+      <PropertyRef Name="IDChiTietDH" />
+    </Key>
+    <Property Name="IDChiTietDH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDDonHang" Type="int" Nullable="false" />
+    <Property Name="IDSanPham" Type="int" Nullable="false" />
+    <Property Name="SoLuongSP" Type="int" Nullable="false" />
+    <Property Name="TongTienSP" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Comment">
+    <Key>
+      <PropertyRef Name="IDComment" />
+    </Key>
+    <Property Name="IDComment" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDSanPham" Type="int" />
+    <Property Name="Username" Type="varchar" MaxLength="100" />
+    <Property Name="CommentText" Type="text" />
+    <Property Name="TrangThai" Type="bit" />
+    <Property Name="Ngaytao" Type="date" />
+  </EntityType>
+  <EntityType Name="CongThuc">
+    <Key>
+      <PropertyRef Name="IDCongThuc" />
+    </Key>
+    <Property Name="IDCongThuc" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDSanPham" Type="int" Nullable="false" />
+    <Property Name="Noidung" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="CouponUser">
+    <Key>
+      <PropertyRef Name="IDCouponUser" />
+    </Key>
+    <Property Name="IDCouponUser" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDCoupon" Type="int" />
+    <Property Name="IDDonHang" Type="int" />
+    <Property Name="NgayDung" Type="date" />
+  </EntityType>
+  <EntityType Name="CuaHang">
+    <Key>
+      <PropertyRef Name="IDCuaHang" />
+    </Key>
+    <Property Name="IDCuaHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="DiaChiCH" Type="nvarchar" MaxLength="500" />
+    <Property Name="SoLuongNV" Type="int" />
+    <Property Name="SDTCuaHang" Type="char" MaxLength="10" />
+    <Property Name="TrangThai" Type="bit" />
+  </EntityType>
+  <EntityType Name="DoanhThu">
+    <Key>
+      <PropertyRef Name="IDDoanhThu" />
+    </Key>
+    <Property Name="IDDoanhThu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NgayThongKe" Type="date" />
+    <Property Name="NgayKetThuc" Type="date" />
+    <Property Name="TongDoanhThu" Type="int" />
+  </EntityType>
+  <EntityType Name="DonHang">
+    <Key>
+      <PropertyRef Name="IDDonHang" />
+    </Key>
+    <Property Name="IDDonHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDNhanVien" Type="int" />
+    <Property Name="NgayDat" Type="date" />
+    <Property Name="TongTienBill" Type="int" />
+    <Property Name="TinhTrang" Type="nvarchar" MaxLength="100" />
+    <Property Name="ThanhToan" Type="nvarchar" MaxLength="100" />
+    <Property Name="PTTT" Type="nvarchar" MaxLength="100" />
+    <Property Name="TenKH" Type="nvarchar" MaxLength="100" />
+    <Property Name="SDTKH" Type="char" MaxLength="10" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="Username" Type="varchar" MaxLength="100" />
+    <Property Name="DiaChiKH" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="KhoHang">
+    <Key>
+      <PropertyRef Name="IDKhoHang" />
+    </Key>
+    <Property Name="IDKhoHang" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDNguyenLieu" Type="int" Nullable="false" />
+    <Property Name="NgayGiao" Type="date" />
+    <Property Name="SoLuongGiao" Type="int" />
+    <Property Name="TrangThai" Type="bit" />
+  </EntityType>
+  <EntityType Name="LoaiSP">
+    <Key>
+      <PropertyRef Name="IDLoaiSP" />
+    </Key>
+    <Property Name="IDLoaiSP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenLSP" Type="nvarchar" MaxLength="100" />
+    <Property Name="Alias" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="NguyenLieu">
+    <Key>
+      <PropertyRef Name="IDNguyenLieu" />
+    </Key>
+    <Property Name="IDNguyenLieu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenNguyenLieu" Type="nvarchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="NhanVien">
+    <Key>
+      <PropertyRef Name="IDNhanVien" />
+    </Key>
+    <Property Name="IDNhanVien" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDCuaHang" Type="int" />
+    <Property Name="TenNV" Type="nvarchar" MaxLength="100" />
+    <Property Name="NgaySinh" Type="date" />
+    <Property Name="DiaChiNV" Type="nvarchar" MaxLength="100" />
+    <Property Name="NgayLam" Type="date" />
+    <Property Name="TrangThai" Type="bit" />
+    <Property Name="Luong" Type="int" />
+  </EntityType>
+  <EntityType Name="ProductFavorite">
+    <Key>
+      <PropertyRef Name="IDProductFavorite" />
+    </Key>
+    <Property Name="IDProductFavorite" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDSanPham" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="PurchaseHisotry">
+    <Key>
+      <PropertyRef Name="IDHistory" />
+    </Key>
+    <Property Name="IDHistory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDSanPham" Type="int" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="100" />
+    <Property Name="NgayMua" Type="date" />
+    <Property Name="SoLuong" Type="int" />
+    <Property Name="TongTien" Type="int" />
+  </EntityType>
+  <EntityType Name="SanPham">
+    <Key>
+      <PropertyRef Name="IDSanPham" />
+    </Key>
+    <Property Name="IDSanPham" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="IDLoaiSP" Type="int" Nullable="false" />
+    <Property Name="IDCuaHang" Type="int" Nullable="false" />
+    <Property Name="TenSP" Type="nvarchar" MaxLength="500" />
+    <Property Name="HinhAnhSP" Type="varchar" MaxLength="500" />
+    <Property Name="GiaBan" Type="int" />
+    <Property Name="Mota" Type="nvarchar(max)" />
+    <Property Name="TrangThai" Type="bit" />
+  </EntityType>
+  <EntityType Name="Slider">
+    <Key>
+      <PropertyRef Name="IDSlider" />
+    </Key>
+    <Property Name="IDSlider" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HinhAnhSlider" Type="varchar" MaxLength="50" />
+    <Property Name="TrangThai" Type="bit" />
+    <Property Name="NoiDungSlider" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="Voucher">
+    <Key>
+      <PropertyRef Name="IDCoupon" />
+    </Key>
+    <Property Name="IDCoupon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TenVoucher" Type="nvarchar" MaxLength="100" />
+    <Property Name="MoTa" Type="nvarchar(max)" />
+    <Property Name="TienGiam" Type="int" Nullable="false" />
+    <Property Name="NgayBatDau" Type="date" Nullable="false" />
+    <Property Name="NgayKetThuc" Type="date" Nullable="false" />
+    <Property Name="GioiHan" Type="int" Nullable="false" />
+    <Property Name="TrangThai" Type="bit" />
+  </EntityType>
+  <Association Name="FK_IDCouponCU">
+    <End Role="Voucher" Type="Self.Voucher" Multiplicity="0..1" />
+    <End Role="CouponUser" Type="Self.CouponUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Voucher">
+        <PropertyRef Name="IDCoupon" />
+      </Principal>
+      <Dependent Role="CouponUser">
+        <PropertyRef Name="IDCoupon" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDCouponDH">
+    <End Role="DonHang" Type="Self.DonHang" Multiplicity="0..1" />
+    <End Role="CouponUser" Type="Self.CouponUser" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonHang">
+        <PropertyRef Name="IDDonHang" />
+      </Principal>
+      <Dependent Role="CouponUser">
+        <PropertyRef Name="IDDonHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDCuaHangNV">
+    <End Role="CuaHang" Type="Self.CuaHang" Multiplicity="0..1" />
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CuaHang">
+        <PropertyRef Name="IDCuaHang" />
+      </Principal>
+      <Dependent Role="NhanVien">
+        <PropertyRef Name="IDCuaHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDCuaHangSP">
+    <End Role="CuaHang" Type="Self.CuaHang" Multiplicity="1" />
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CuaHang">
+        <PropertyRef Name="IDCuaHang" />
+      </Principal>
+      <Dependent Role="SanPham">
+        <PropertyRef Name="IDCuaHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDDonHangCTDH">
+    <End Role="DonHang" Type="Self.DonHang" Multiplicity="1" />
+    <End Role="ChiTietDonHang" Type="Self.ChiTietDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DonHang">
+        <PropertyRef Name="IDDonHang" />
+      </Principal>
+      <Dependent Role="ChiTietDonHang">
+        <PropertyRef Name="IDDonHang" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDHistory">
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
+    <End Role="PurchaseHisotry" Type="Self.PurchaseHisotry" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SanPham">
+        <PropertyRef Name="IDSanPham" />
+      </Principal>
+      <Dependent Role="PurchaseHisotry">
+        <PropertyRef Name="IDSanPham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDIDNguyenLieu">
+    <End Role="NguyenLieu" Type="Self.NguyenLieu" Multiplicity="1" />
+    <End Role="KhoHang" Type="Self.KhoHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NguyenLieu">
+        <PropertyRef Name="IDNguyenLieu" />
+      </Principal>
+      <Dependent Role="KhoHang">
+        <PropertyRef Name="IDNguyenLieu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDLoaiSPSP">
+    <End Role="LoaiSP" Type="Self.LoaiSP" Multiplicity="1" />
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="LoaiSP">
+        <PropertyRef Name="IDLoaiSP" />
+      </Principal>
+      <Dependent Role="SanPham">
+        <PropertyRef Name="IDLoaiSP" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDNhanVienDH">
+    <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
+    <End Role="DonHang" Type="Self.DonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NhanVien">
+        <PropertyRef Name="IDNhanVien" />
+      </Principal>
+      <Dependent Role="DonHang">
+        <PropertyRef Name="IDNhanVien" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDSanPhamCM">
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="0..1" />
+    <End Role="Comment" Type="Self.Comment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SanPham">
+        <PropertyRef Name="IDSanPham" />
+      </Principal>
+      <Dependent Role="Comment">
+        <PropertyRef Name="IDSanPham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDSanPhamCT">
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
+    <End Role="CongThuc" Type="Self.CongThuc" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SanPham">
+        <PropertyRef Name="IDSanPham" />
+      </Principal>
+      <Dependent Role="CongThuc">
+        <PropertyRef Name="IDSanPham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDSanPhamCTDH">
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
+    <End Role="ChiTietDonHang" Type="Self.ChiTietDonHang" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SanPham">
+        <PropertyRef Name="IDSanPham" />
+      </Principal>
+      <Dependent Role="ChiTietDonHang">
+        <PropertyRef Name="IDSanPham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IDSanPhamYT">
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
+    <End Role="ProductFavorite" Type="Self.ProductFavorite" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SanPham">
+        <PropertyRef Name="IDSanPham" />
+      </Principal>
+      <Dependent Role="ProductFavorite">
+        <PropertyRef Name="IDSanPham" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="QLCHUOICOFFEEModelStoreContainer">
+    <EntitySet Name="ChiTietDonHang" EntityType="Self.ChiTietDonHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Comment" EntityType="Self.Comment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CongThuc" EntityType="Self.CongThuc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CouponUser" EntityType="Self.CouponUser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CuaHang" EntityType="Self.CuaHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DoanhThu" EntityType="Self.DoanhThu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="DonHang" EntityType="Self.DonHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="KhoHang" EntityType="Self.KhoHang" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="LoaiSP" EntityType="Self.LoaiSP" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NguyenLieu" EntityType="Self.NguyenLieu" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductFavorite" EntityType="Self.ProductFavorite" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PurchaseHisotry" EntityType="Self.PurchaseHisotry" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Slider" EntityType="Self.Slider" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Voucher" EntityType="Self.Voucher" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_IDCouponCU" Association="Self.FK_IDCouponCU">
+      <End Role="Voucher" EntitySet="Voucher" />
+      <End Role="CouponUser" EntitySet="CouponUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDCouponDH" Association="Self.FK_IDCouponDH">
+      <End Role="DonHang" EntitySet="DonHang" />
+      <End Role="CouponUser" EntitySet="CouponUser" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDCuaHangNV" Association="Self.FK_IDCuaHangNV">
+      <End Role="CuaHang" EntitySet="CuaHang" />
+      <End Role="NhanVien" EntitySet="NhanVien" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDCuaHangSP" Association="Self.FK_IDCuaHangSP">
+      <End Role="CuaHang" EntitySet="CuaHang" />
+      <End Role="SanPham" EntitySet="SanPham" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDDonHangCTDH" Association="Self.FK_IDDonHangCTDH">
+      <End Role="DonHang" EntitySet="DonHang" />
+      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDHistory" Association="Self.FK_IDHistory">
+      <End Role="SanPham" EntitySet="SanPham" />
+      <End Role="PurchaseHisotry" EntitySet="PurchaseHisotry" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDIDNguyenLieu" Association="Self.FK_IDIDNguyenLieu">
+      <End Role="NguyenLieu" EntitySet="NguyenLieu" />
+      <End Role="KhoHang" EntitySet="KhoHang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDLoaiSPSP" Association="Self.FK_IDLoaiSPSP">
+      <End Role="LoaiSP" EntitySet="LoaiSP" />
+      <End Role="SanPham" EntitySet="SanPham" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDNhanVienDH" Association="Self.FK_IDNhanVienDH">
+      <End Role="NhanVien" EntitySet="NhanVien" />
+      <End Role="DonHang" EntitySet="DonHang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDSanPhamCM" Association="Self.FK_IDSanPhamCM">
+      <End Role="SanPham" EntitySet="SanPham" />
+      <End Role="Comment" EntitySet="Comment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDSanPhamCT" Association="Self.FK_IDSanPhamCT">
+      <End Role="SanPham" EntitySet="SanPham" />
+      <End Role="CongThuc" EntitySet="CongThuc" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDSanPhamCTDH" Association="Self.FK_IDSanPhamCTDH">
+      <End Role="SanPham" EntitySet="SanPham" />
+      <End Role="ChiTietDonHang" EntitySet="ChiTietDonHang" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IDSanPhamYT" Association="Self.FK_IDSanPhamYT">
+      <End Role="SanPham" EntitySet="SanPham" />
+      <End Role="ProductFavorite" EntitySet="ProductFavorite" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<QuanLyCuaHangCoffee.Models.EF.SanPham>
+@{
+    ViewBag.Title = "SelectStore";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("SelectStore", "SanPham", FormMethod.Get))
+{
+    <label for="IDCuaHang">Chọn cửa hàng:</label>
+    <select name="IDCuaHang" id="storeId">
+        @foreach (var item in Model)
+        {
+            <option value="@item.IDCuaHang">@item.CuaHang.DiaChiCH</option>
+        }
+    </select>
+    <button type="submit">Xem sản phẩm</button>
+}
+

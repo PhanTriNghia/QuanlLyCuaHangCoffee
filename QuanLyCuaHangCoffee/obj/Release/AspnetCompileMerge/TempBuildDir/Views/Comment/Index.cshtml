@@ -1,0 +1,38 @@
+﻿@model IEnumerable<QuanLyCuaHangCoffee.Models.EF.Comment>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .Comment_title {
+        margin-left: 10px;
+        margin-bottom: 5px;
+        margin-top: 5px;
+    }
+
+    .Comment_content {
+        margin-left: 10px;
+    }
+</style>
+
+<h2 class="Comment_title">Đánh giá</h2>
+
+@if (Model != null && Model.Any())
+{
+    <div class="Comment_content">
+        @foreach (var item in Model)
+        {
+            <div class="d-flex">
+                <p>@item.Username: <span>@item.CommentText</span></p>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p class="Comment_content">Chưa có đánh giá nào</p>
+}
+
+
+

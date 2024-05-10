@@ -1,0 +1,46 @@
+﻿@model QuanLyCuaHangCoffee.Models.EF.Comment
+
+@{
+    ViewBag.Title = "PostComment";
+    Layout = null;
+}
+
+<style>
+    .Comment_title{
+        margin-left: 10px;
+        margin-bottom: 5px;
+    }
+    input[type=text], input[type=email], input[type=password], input[type=number], input[type=search], textarea {
+        width: 100%;
+        max-width: 600px;
+        height: 150px;
+        margin-left: 5px;
+    }
+    .btn-black {
+        background-color: black;
+        color: white;
+        margin-left: 10px;
+        margin-bottom: 10px;
+    }
+
+</style>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal">
+    <h2 class="Comment_title">Nhận xét của bạn</h2>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        <div class="col-md-12">
+            @Html.TextAreaFor(model => model.CommentText, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.CommentText, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <input type="submit" value="Gửi đi" class="btn btn-black" />
+    
+</div>
+}
+
+

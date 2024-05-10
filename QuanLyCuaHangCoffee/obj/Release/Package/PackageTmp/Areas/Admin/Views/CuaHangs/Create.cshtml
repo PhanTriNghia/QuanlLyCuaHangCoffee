@@ -1,0 +1,60 @@
+﻿@model QuanLyCuaHangCoffee.Models.EF.CuaHang
+
+@{
+    ViewBag.Title = "Thêm mới cửa hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .d-grid {
+        display: inline-grid;
+    }
+</style>
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Thêm mới cửa hàng</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.DiaChiCH, "Địa chỉ cửa hàng", htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-12">
+                                    @Html.EditorFor(model => model.DiaChiCH, new { htmlAttributes = new { @class = "form-control"} })
+                                    @Html.ValidationMessageFor(model => model.DiaChiCH, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Trạng thái cửa hàng: </label>
+                                <div class="col-md-12">
+                                    <input type="radio" name="trangThaiMoi" value="true" />
+                                    <label>Mở cửa</label>
+                                </div>
+                                <div class="col-md-12">
+                                    <input type="radio" name="trangThaiMoi" value="false" />
+                                    <label>Đóng cửa</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-1 d-grid">
+                                    <input type="submit" value="Thêm mới" class="btn btn-success" />
+                                </div>
+                                <div class="col-1 d-grid">
+                                    @Html.ActionLink("Trở lại", "Index", null, new { @class = "btn btn-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

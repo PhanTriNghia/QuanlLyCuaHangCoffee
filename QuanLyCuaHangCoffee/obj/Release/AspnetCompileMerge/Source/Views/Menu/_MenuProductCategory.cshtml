@@ -1,0 +1,108 @@
+﻿@model IEnumerable<QuanLyCuaHangCoffee.Models.EF.LoaiSP>
+@{
+    Layout = null;
+}
+
+<style>
+    .navbar {
+        margin-top: 30px;
+        align-content: end;
+    }
+
+    .navbar_right_items {
+        margin-right: 15px;
+        font-size: 18px;
+    }
+
+    .header {
+        height: auto;
+    }
+
+        .header .navbar a {
+            margin: inherit;
+        }
+
+    .btn {
+        border: none;
+    }
+
+        .btn:hover {
+            box-shadow: none;
+        }
+
+    .container-fluid {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+</style>
+
+@if (Model != null && Model.Any())
+{
+
+    <header class="header">
+        <div id="menu-btn" class="fas fa-bars"></div>
+        <div>
+            <a href="/home/index"><img src="~/Content/img/logocf.png" alt="logo" style="width: 120px; height: 100px;"></a>
+        </div>
+
+        <nav class="navbar navbar-expand-lg">
+            @foreach (var items in Model)
+            {
+                <a style="margin:0 1rem" href="/loai-san-pham/@items.Alias - @items.IDLoaiSP">@items.TenLSP</a>
+            }
+        </nav>
+
+        <div class="navbar_right d-flex">
+            <div class="navbar navbar-expand-lg">
+                <div class="container-fluid">
+                    <a href="/shoppingcart/index"><i class="fa-solid fa-cart-shopping"></i></a>
+                </div>
+
+            </div>
+            @if (!Request.IsAuthenticated)
+            {
+                <nav class="navbar navbar-expand-lg">
+                    <div class="container-fluid">
+                        <a href="/account/login"><i class="fa-solid fa-user"></i></a>
+                    </div>
+                </nav>
+            }
+            else
+            {
+                <nav class="navbar navbar-expand-lg">
+                    <div class="container-fluid">
+                        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                            <ul class="navbar-nav">
+                                <li class="nav-item dropdown">
+                                    <button class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                                        @User.Identity.Name
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" style="font-size: 14px" href="/account/profile">Thông tin cá nhân</a></li>
+                                        <li><a class="dropdown-item" style="font-size: 14px" href="/shoppingcart/orderuser">Đơn hàng của bạn</a></li>
+                                        <li><a class="dropdown-item" style="font-size: 14px" href="/productfavorite/index">Sản phẩm yêu thích</a></li>
+                                        <li><a class="dropdown-item" style="font-size: 14px" href="/purchasehistory/index">Lịch sử mua hàng</a></li>
+
+                                        <li><a class="dropdown-item" style="font-size: 14px" href="javascript:document.getElementById('logOffFormUser').submit()">Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            }
+
+        </div>
+    </header>
+}
+@*@Html.Action("Login", "Account")*@
+
+@if (Request.IsAuthenticated)
+{
+    <div style="display: none">
+        @using (Html.BeginForm("LogOffUser", "Account", FormMethod.Post, new { @id = "logOffFormUser" }))
+        {
+            @Html.AntiForgeryToken()
+        }
+    </div>
+}

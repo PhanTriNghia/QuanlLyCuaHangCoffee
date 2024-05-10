@@ -1,0 +1,55 @@
+﻿@model QuanLyCuaHangCoffee.Models.RegisterAccountUserViewModel
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .user-infor-text{
+        text-align: left;
+        font-size: 28px;
+        margin-bottom: 16px;
+    }
+</style>
+
+<div class="container" style="margin-top: 18rem">
+    <div class="user-infor">
+            <h2 class="user-infor-text">Thông tin tài khoản</h2>
+            <div class="row">
+                @using (Html.BeginForm("PostProfile", "Account"))
+                {
+                    @Html.ValidationSummary(false)
+                    @Html.AntiForgeryToken()
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Tên đăng nhập</label>
+                        <input style="max-width:600px" type="text" class="form-control" name="UserName" value="@Model.UserName" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input style="max-width:600px" type="text" class="form-control" name="Email" value="@Model.Email" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label>Số điện thoại</label>
+                        <input style="max-width:600px" type="text" class="form-control" name="Phone" value="@Model.Phone" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-success" value="Cập nhật"/>
+                    </div>
+                </div>
+                   
+                }
+                @* <div class="col-md-6">
+            <div class="form-group">
+                <label>Tên khách hàng</label>
+                <input style="max-width:600px" type="text" class="form-control" value="@Model.UserName" />
+            </div>
+        </div>*@
+
+
+            </div>
+
+        </div>
+
+</div>
+

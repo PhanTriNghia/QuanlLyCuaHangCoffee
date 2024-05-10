@@ -1,0 +1,68 @@
+﻿@model QuanLyCuaHangCoffee.Models.EF.CuaHang
+
+@{
+    ViewBag.Title = "Cập nhật thông tin cửa hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    .d-grid {
+        display: inline-grid;
+    }
+</style>
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Cập nhật thông tin cửa hàng</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.DiaChiCH, "Địa chỉ cửa hàng", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.DiaChiCH, new { htmlAttributes = new { @class = "form-control", Name = "diaChi" } })
+                                @Html.ValidationMessageFor(model => model.DiaChiCH, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.SDTCuaHang, "Số điện thoại cửa hàng", htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-12">
+                                @Html.EditorFor(model => model.SDTCuaHang, new { htmlAttributes = new { @class = "form-control", Name = "SDT" } })
+                                @Html.ValidationMessageFor(model => model.SDTCuaHang, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Trạng thái cửa hàng: </label>
+                            <div class="col-md-12">
+                                <input type="radio" name="trangThaiMoi" value="true" @(Model.TrangThai ? "checked" : "") />
+                                <label>Mở cửa</label>
+                            </div>
+                            <div class="col-md-12">
+                                <input type="radio" name="trangThaiMoi" value="false" @(Model.TrangThai ? "" : "checked") />
+                                <label>Đóng cửa</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-1 d-grid">
+                                <input type="submit" value="Cập nhật" class="btn btn-success" />
+                            </div>
+                            <div class="col-1 d-grid">
+                                @Html.ActionLink("Trở lại", "Index", null, new { @class = "btn btn-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

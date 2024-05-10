@@ -1,0 +1,122 @@
+﻿@model QuanLyCuaHangCoffee.Models.OderViewModel
+
+@using (Ajax.BeginForm("CheckOut", "ShoppingCart", new AjaxOptions
+{
+    HttpMethod = "POST",
+    UpdateTargetId = "load_data"
+}))
+{
+    @Html.AntiForgeryToken()<style>
+        input, select, textarea {
+            max-width: 750px;
+        }
+    </style><div class="container">
+    <h4 class="mb-3">Thông tin khách hàng</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <label for="kh_ten">Họ tên</label>
+            <input type="text" class="form-control" name="CustomerName" required>
+        </div>
+
+        <div class="col-md-12">
+            <label for="kh_diachi">Địa chỉ</label>
+            <input type="text" class="form-control" name="Address" required>
+        </div>
+        <div class="col-md-12">
+            <label for="kh_dienthoai">Điện thoại</label>
+            <input type="number" class="form-control" name="Phone" required>
+        </div>
+        <div class="col-md-12">
+            <label for="kh_email">Email</label>
+            <input type="text" class="form-control" name="Email" required>
+
+        </div>
+
+    </div>
+   @* @if (!Request.IsAuthenticated)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <label for="kh_ten">Họ tên</label>
+                <input type="text" class="form-control" name="CustomerName" required>
+            </div>
+
+            <div class="col-md-12">
+                <label for="kh_diachi">Địa chỉ</label>
+                <input type="text" class="form-control" name="Address" required>
+            </div>
+            <div class="col-md-12">
+                <label for="kh_dienthoai">Điện thoại</label>
+                <input type="text" class="form-control" name="Phone" required>
+            </div>
+            <div class="col-md-12">
+                <label for="kh_email">Email</label>
+                <input type="text" class="form-control" name="Email" required>
+            </div>
+        </div>
+    }
+    else
+    {
+        var user = (QuanLyCuaHangCoffee.Models.ApplicationUser)ViewBag.User;
+        <div class="row">
+            <div class="col-md-12">
+                <label for="kh_ten">Họ tên</label>
+                <input type="text" class="form-control" name="CustomerName" required>
+            </div>
+            <div class="col-md-12">
+                <label for="kh_diachi">Địa chỉ</label>
+                <input type="text" class="form-control" name="Address" required>
+            </div>
+            <div class="col-md-12">
+                <label for="kh_dienthoai">Điện thoại</label>
+                <input type="text" class="form-control" value="@user.PhoneNumber" name="Phone" required>
+            </div>
+            <div class="col-md-12">
+                <label for="kh_email">Email</label>
+                <input type="text" class="form-control" value="@user.Email" name="Email" required>
+            </div>
+
+        </div>
+    }*@
+
+    <h4 class="mb-3">Hình thức thanh toán</h4>
+
+    <div class="d-block my-3">
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input"
+                   checked="checked" name="payment_method" value="COD">
+            <label class="custom-control-label" for="httt-1"><img src="~/Content/img/money.jpg" height="20px" , width="30px"> Tiền mặt</label>
+        </div>
+        <div class="custom-control custom-radio">
+            <input type="radio" class="custom-control-input"
+                   name="payment_method" value="VnPay">
+            <label class="custom-control-label" for="httt-3"><img src="~/Content/img/vnpay.png" height="20px" , width="30px"> VnPay</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-6">
+            <button type="submit" class="btn btn-block btn-success">Đặt hàng</button>
+        </div>
+    </div>
+</div>
+}
+@*
+    @section scripts{
+        <script>
+            document.getElementById("btnPlaceOrder").addEventListener("click", function () {
+                var selectedPaymentMethod = document.querySelector('input[name="payment_method"]:checked').value;
+
+                if (selectedPaymentMethod === "COD") {
+                    // Chuyển hướng người dùng đến URL cho thanh toán COD
+                    window.location.href = "/ShoppingCart/CheckOut";
+                } else if (selectedPaymentMethod === "VnPay") {
+                    // Chuyển hướng người dùng đến URL cho thanh toán trực tuyến (VnPay)
+                    window.location.href = "/ShoppingCart/CheckOutVnPay";
+                } else {
+                    // Hiển thị thông báo cho người dùng nếu không chọn phương thức thanh toán
+                    alert("Vui lòng chọn phương thức thanh toán.");
+                }
+            });
+        </script>
+    }*@
+

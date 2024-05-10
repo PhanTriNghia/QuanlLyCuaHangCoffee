@@ -1,0 +1,178 @@
+﻿@model PagedList.PagedList<QuanLyCuaHangCoffee.Models.EF.Voucher>
+@using PagedList.Mvc;
+@using PagedList;
+@{
+    ViewBag.Title = "Thông tin mã giảm giá";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .d-grid {
+        display: grid;
+    }
+
+    .m-b-5 {
+        margin-bottom: 5px;
+    }
+
+    .m-l-10 {
+        margin-left: 10px;
+    }
+</style>
+
+<section class="content">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title"> Thông tin mã giảm giá</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-12">
+                    <p>
+                        @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-success" })
+                    </p>
+                    <div class="jsgrid">
+                        <div class="jsgrid-grid-header ">
+                            <table class="jsgrid-table">
+                                <tr class="jsgrid-header-row">
+                                    <th class="jsgrid-header-cell" style="width: 50px">STT</th>
+                                    <th class="jsgrid-header-cell jsgrid-align-center">Mô tả</th>
+                                    <th class="jsgrid-header-cell">Mã giảm giá</th>
+                                    <th class="jsgrid-header-cell">Tiền giảm</th>
+                                    <th class="jsgrid-header-cell">Ngày bắt đầu</th>
+                                    <th class="jsgrid-header-cell">Ngày kết thúc</th>
+                                    <th class="jsgrid-header-cell">Số lần dùng</th>
+                                    <th class="jsgrid-header-cell">Trạng thái</th>
+                                    <th class="jsgrid-header-cell" style="width: 100px"></th>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="jsgrid-grid-body">
+                            <table class="jsgrid-table">
+                                <tbody>
+                                    @if (Model != null && Model.Any())
+                                    {
+
+                                        var i = 1;
+                                        foreach (var item in Model)
+                                        {
+                                    <tr class="jsgrid-row ">
+                                        <td class="jsgrid-cell jsgrid-align-center" style="width: 50px">
+                                            @i
+                                        </td>
+                                        <td class="jsgrid-cell jsgrid-align-center">
+                                            @Html.DisplayFor(modelItem => item.MoTa)
+                                        </td>
+                                        <td class="jsgrid-cell">
+                                            @Html.DisplayFor(modelItem => item.TenVoucher)
+                                        </td>
+                                        <td class="jsgrid-cell">
+                                            @Html.DisplayFor(modelItem => item.TienGiam)
+                                        </td>
+                                        <td class="jsgrid-cell">
+                                            @Html.DisplayFor(modelItem => item.NgayBatDau)
+                                        </td>
+                                        <td class="jsgrid-cell">
+                                            @Html.DisplayFor(modelItem => item.NgayKetThuc)
+                                        </td>
+                                        <td class="jsgrid-cell">
+                                            @Html.DisplayFor(modelItem => item.GioiHan)
+                                        </td>
+
+                                        <td class="jsgrid-cell">
+                                            @if (item.TrangThai == true)
+                                            {
+                                                <p style="color: green">Còn thời hạn</p>
+                                            }
+                                            else
+                                            {
+                                                <p style="color:red">Hết hạn</p>
+                                            }
+                                        </td>
+                                        <td class="jsgrid-cell jsgrid-align-center" style="width: 100px">
+                                            <div class="d-grid m-b-5">
+                                                @Html.ActionLink("Cập nhật", "Edit", new { id = item.IDCoupon }, new { @class = "btn btn-sm btn-primary" })
+                                            </div>
+                                            <div class="d-grid m-b-5">
+                                                <a href="#" data-id="@item.IDCoupon" class="btn btn-sm btn-danger btnDelete">Xóa</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                        }
+                                    }
+                                </tbody>
+
+                            </table>
+                            <div class="m-l-10">
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TenVoucher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MoTa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TienGiam)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayBatDau)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayKetThuc)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GioiHan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TrangThai)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenVoucher)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MoTa)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TienGiam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayBatDau)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NgayKetThuc)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GioiHan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TrangThai)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.IDCoupon }) |
+                @Html.ActionLink("Details", "Details", new { id=item.IDCoupon }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.IDCoupon })
+            </td>
+        </tr>
+    }
+
+    </table>*@

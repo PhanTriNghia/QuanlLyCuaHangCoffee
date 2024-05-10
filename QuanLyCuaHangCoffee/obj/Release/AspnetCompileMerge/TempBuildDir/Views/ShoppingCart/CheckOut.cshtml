@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style>
+    .mt-12{
+        margin-top:12rem
+    }
+</style>
+<body>
+        <main role="main">
+            <div class="container mt-12">
+                <form class="needs-validation" name="frmthanhtoan" method="post"
+                      action="#">
+                    <input type="hidden" name="kh_tendangnhap" value="dnpcuong">
+
+                    <div class="py-5 text-center">
+                        <i class="fa fa-credit-card fa-4x" aria-hidden="true"></i>
+                        <h2><img src="~/Content/img/checkout.png" height="50px" , width="50px"> Xác nhận đơn hàng</h2>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4 order-md-2 mb-4">
+                           
+                                @Html.Action("Partial_Items_ThanhToan", "ShoppingCart")
+                            
+                            </div>
+                        <div class="col-md-8 order-md-1">
+                            @Html.Action("Partial_CheckOut", "Shoppingcart")                      
+                            <hr class="mb-4">
+
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </main>
+    
+
+
+
+        @*<script src="../vendor/jquery/jquery.min.js"></script>
+            <script src="../vendor/popperjs/popper.min.js"></script>
+            <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+
+            <script src="../assets/js/app.js"></script>*@
+
+    </body>
+
+

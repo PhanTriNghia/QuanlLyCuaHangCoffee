@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<body>
+    <!-- Slide -->
+    @Html.Action("ListAllSlide", "Slide")
+
+    <div class="container body-content">
+        <!-- Menu -->
+        @Html.Action("ItemsByCateId", "SanPham")
+
+        <!-- ABOUT -->
+        <section class="about" id="about">
+            <h1 class="heading">về chúng tôi <span>Chúng Tôi</span></h1>
+            <div class="row">
+                <div class="image">
+                    <img src="image/about-img.png" alt="">
+                </div>  
+                <div class="content">
+                    <h3 class="title">Về chúng tôi</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel rerum laboriosam reprehenderit ipsa id
+                        repellat odio illum, voluptas, necessitatibus assumenda adipisci. Hic, maiores iste? Excepturi illo
+                        dolore mollitia qui quia.
+                    </p>
+                    <a href="#" class="btn">Đọc thêm</a>
+                </div>
+            </div>
+    </div>
+    </section>
+
+    <!-- BOOK -->
+    <section class="book" id="book">
+        <h1 class="heading">Đặt bàn <span>Đặt Bàn</span></h1>
+        <form action="">
+            <input type="text" placeholder="Name" class="box">
+            <input type="email" placeholder="Email" class="box">
+            <input type="number" placeholder="Number" class="box">
+            <textarea name="" placeholder="Message" class="box" id="" cols="30" rows="10"></textarea>
+            <input type="submit" value="send message" class="btn">
+        </form>
+    </section>
+
+    </div>
+    <!-- MENU -->
+
+</body>
